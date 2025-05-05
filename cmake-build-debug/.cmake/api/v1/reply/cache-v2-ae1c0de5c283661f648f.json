@@ -11,7 +11,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book/cmake-build-debug"
+			"value" : "C:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book/cmake-build-debug"
 		},
 		{
 			"name" : "AVL_Tree_Address_Book_IS_TOP_LEVEL",
@@ -35,7 +35,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book"
+			"value" : "C:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book"
 		},
 		{
 			"name" : "CMAKE_ADDR2LINE",
@@ -91,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book/cmake-build-debug"
+			"value" : "c:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -611,7 +611,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -683,7 +683,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book"
+			"value" : "C:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",

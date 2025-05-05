@@ -1,3 +1,3 @@
-C:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book/cmake-build-debug/CMakeFiles/AVL_Tree_Address_Book.dir
-C:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book/cmake-build-debug/CMakeFiles/AVL_Tree_Address_Book.dir
+C:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book/cmake-build-debug/CMakeFiles/rebuild_cache.dir

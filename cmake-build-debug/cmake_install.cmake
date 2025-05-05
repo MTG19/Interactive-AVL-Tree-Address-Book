@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book
+# Install script for directory: C:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

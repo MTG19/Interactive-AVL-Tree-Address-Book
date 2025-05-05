@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book/cmake-build-debug",
-		"source" : "C:/Users/LENOVO/CLionProjects/Data structure/Interactive-AVL-Tree-Address-Book"
+		"build" : "C:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book/cmake-build-debug",
+		"source" : "C:/Users/LENOVO/CLionProjects/Data structure/AVL-Tree-Address-Book"
 	},
 	"version" : 
 	{

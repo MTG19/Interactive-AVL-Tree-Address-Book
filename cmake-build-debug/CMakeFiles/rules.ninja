@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S"C:\Users\LENOVO\CLionProjects\Data structure\Interactive-AVL-Tree-Address-Book" -B"C:\Users\LENOVO\CLionProjects\Data structure\Interactive-AVL-Tree-Address-Book\cmake-build-debug"
+  command = "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S"C:\Users\LENOVO\CLionProjects\Data structure\AVL-Tree-Address-Book" -B"C:\Users\LENOVO\CLionProjects\Data structure\AVL-Tree-Address-Book\cmake-build-debug"
   description = Re-running CMake...
   generator = 1
 
