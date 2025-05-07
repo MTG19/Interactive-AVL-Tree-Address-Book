@@ -118,11 +118,21 @@ private:
         inorder(node->right);
     }
 
-    void displayTree(Node* node, int space = 0, int indent = 5) {
+    void displayTree(Node* node, int space = 0, int indent = 4) {
         if (!node) return;
+
         space += indent;
+
+        // Print right subtree first (top of console)
         displayTree(node->right, space);
-        cout << setw(space) << node->id << endl;
+
+        // Print current node
+        cout << endl;
+        for (int i = indent; i < space; i++)
+            cout << " ";
+        cout << node->id;
+
+        // Print left subtree (bottom of console)
         displayTree(node->left, space);
     }
 
@@ -230,14 +240,22 @@ public:
         }
     }
 
+    bool exists(int id) {
+        return search(root, id) != nullptr;
+    }
+
 };
+
 
 int main() {
     AVLTree addressBook;
     int choice;
 
+    cout << "------------------------"
+            "\nAddress Book Application\n"
+             << "------------------------\n";
     while (true) {
-        cout << "\nAddress Book Application\n"
+        cout << "\nChoose what do you want to do:\n"
              << "------------------------\n"
              << "1. Add New Contact\n"
              << "2. Search for Contact\n"
@@ -256,7 +274,7 @@ int main() {
 
         if (choice == 1) {
             int mode;
-            cout << "Choose input method:\n"
+            cout << "\nChoose input method:\n"
                  << "1. Manual input (cin)\n"
                  << "2. Read from file\n"
                  << "Enter choice: ";
@@ -271,8 +289,27 @@ int main() {
             if (mode == 1) {
                 int id;
                 Contact contact;
+
                 cout << "Enter unique ID (integer): ";
-                cin >> id;
+                // Prompt for unique ID until a valid one is provided
+                while (true) {
+                    cin >> id;
+
+                    if (cin.fail()) {
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        cout << "Invalid input. ID must be an integer.\nPlease enter valid ID: ";
+                        continue;
+                    }
+
+                    if (addressBook.exists(id)) {
+                        cout << "This ID already exists. Please enter a different ID.\nPlease try another ID: ";
+                        continue;
+                    }
+
+                    break; // valid id
+                }
+
                 cin.ignore();  // clear newline
                 cout << "Enter name: ";
                 getline(cin, contact.name);
@@ -281,6 +318,7 @@ int main() {
                 cout << "Enter email: ";
                 getline(cin, contact.email);
                 addressBook.insert(id, contact);
+
             }
             else if (mode == 2) {
                 string filename;
@@ -319,19 +357,42 @@ int main() {
         else if (choice == 2) {
             int id;
             cout << "Enter ID to search: ";
-            cin >> id;
+            while (true) {
+                cin >> id;
+
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Invalid input. ID must be an integer.\nPlease try again: ";
+                    continue;
+                }
+
+                break; // valid id
+            }
             addressBook.search(id);
         }
         else if (choice == 3) {
             int id;
             cout << "Enter ID to delete: ";
-            cin >> id;
+            while (true) {
+                cin >> id;
+
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Invalid input. ID must be an integer.\nPlease try again: ";
+                    continue;
+                }
+
+                break; // valid id
+            }
             addressBook.deleteContact(id);
         }
         else if (choice == 4) {
             addressBook.listContacts();
         }
         else if (choice == 5) {
+            cout<< "\nCurrent AVL Tree Structure Horizontally:\n";
             addressBook.displayTreeStructure();
         }
         else {
