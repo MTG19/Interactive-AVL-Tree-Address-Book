@@ -231,8 +231,64 @@ public:
 };
 
 
-
 int main() {
-    cout << "Welcome to the Contact Management System!" << endl;
+    AVLTree addressBook;
+    int choice;
+
+    while (true) {
+        cout << "\nAddress Book Application\n"
+             << "------------------------\n"
+             << "1. Add New Contact\n"
+             << "2. Search for Contact\n"
+             << "3. Delete Contact (Optional)\n"
+             << "4. List All Contacts (Sorted by ID)\n"
+             << "5. Display Current Tree Structure\n"
+             << "------------------------\n"
+             << "Enter operation (1-5): ";
+        cin >> choice;
+
+        if (cin.fail()) {
+            cin.clear(); cin.ignore(10000, '\n');
+            cout << "Invalid input. Please enter a number from 1 to 5." << endl;
+            continue;
+        }
+
+        if (choice == 1) {
+            int id;
+            Contact contact;
+            cout << "Enter unique ID (integer): ";
+            cin >> id;
+            cin.ignore();  // clear newline
+            cout << "Enter name: ";
+            getline(cin, contact.name);
+            cout << "Enter phone: ";
+            getline(cin, contact.phone);
+            cout << "Enter email: ";
+            getline(cin, contact.email);
+            addressBook.insert(id, contact);
+        }
+        else if (choice == 2) {
+            int id;
+            cout << "Enter ID to search: ";
+            cin >> id;
+            addressBook.search(id);
+        }
+        else if (choice == 3) {
+            int id;
+            cout << "Enter ID to delete: ";
+            cin >> id;
+            addressBook.deleteContact(id);
+        }
+        else if (choice == 4) {
+            addressBook.listContacts();
+        }
+        else if (choice == 5) {
+            addressBook.displayTreeStructure();
+        }
+        else {
+            cout << "Invalid choice. Please select between 1 and 5." << endl;
+        }
+    }
+
     return 0;
 }
