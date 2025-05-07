@@ -131,6 +131,50 @@ private:
         return current;
     }
 
+    Node* deleteNode(Node* root, int id, bool& found) {
+        if (!root)
+            return root;
+
+        if (id < root->id)
+            root->left = deleteNode(root->left, id, found);
+        else if (id > root->id)
+            root->right = deleteNode(root->right, id, found);
+        else {
+            found = true;
+            if (!root->left || !root->right) {
+                Node* temp = root->left ? root->left : root->right;
+                delete root;
+                return temp;
+            }
+            Node* temp = minValueNode(root->right);
+            root->id = temp->id;
+            root->contact = temp->contact;
+            root->right = deleteNode(root->right, temp->id, found);
+        }
+
+        root->height = 1 + max(height(root->left), height(root->right));
+        int balance = getBalance(root);
+
+        if (balance > 1 && getBalance(root->left) >= 0)
+            return rightRotate(root);
+
+        if (balance > 1 && getBalance(root->left) < 0) {
+            root->left = leftRotate(root->left);
+            return rightRotate(root);
+        }
+
+        if (balance < -1 && getBalance(root->right) <= 0)
+            return leftRotate(root);
+
+        if (balance < -1 && getBalance(root->right) > 0) {
+            root->right = rightRotate(root->right);
+            return leftRotate(root);
+        }
+
+        return root;
+    }
+
+
 };
 
 
