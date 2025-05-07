@@ -106,6 +106,30 @@ private:
         return search(node->right, id);
     }
 
+    void inorder(Node* node) {
+        if (!node) return;
+        inorder(node->left);
+        cout << "ID: " << node->id
+             << ", Name: " << node->contact.name
+             << ", Phone: " << node->contact.phone
+             << ", Email: " << node->contact.email << endl;
+        inorder(node->right);
+    }
+
+    void displayTree(Node* node, int space = 0, int indent = 5) {
+        if (!node) return;
+        space += indent;
+        displayTree(node->right, space);
+        cout << setw(space) << node->id << endl;
+        displayTree(node->left, space);
+    }
+
+    Node* minValueNode(Node* node) {
+        Node* current = node;
+        while (current->left)
+            current = current->left;
+        return current;
+    }
 
 };
 
