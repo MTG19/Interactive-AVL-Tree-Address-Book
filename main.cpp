@@ -5,39 +5,46 @@
 #include <limits>
 using namespace std;
 
+// Structure to store contact details
 struct Contact {
-    string name;
-    string phone;
-    string email;
+    string name;   // Contact name
+    string phone;  // Contact phone number
+    string email;  // Contact email address
 };
 
+// Node structure for AVL Tree
 struct Node {
-    int id; // key
-    Contact contact; // data
-    Node* left;
-    Node* right;
-    int height;
+    int id; // Unique ID for the contact
+    Contact contact; // Contact details
+    Node* left; // Pointer to the left child
+    Node* right; // Pointer to the right child
+    int height; // Height of the node in the AVL tree
 
+    // Constructor to initialize a new node
     Node(int id, Contact contact) {
         this->id = id;
         this->contact = contact;
         left = right = nullptr;
-        height = 1;
+        height = 1; // New node is initially at height 1
     }
 };
 
+// AVL Tree class to manage contacts
 class AVLTree {
 private:
-    Node* root;
+    Node* root; // Root node of the AVL tree
 
+    // Helper function to get the height of a node
     int height(Node* n) {
         return n ? n->height : 0;
     }
 
+    // Helper function to calculate the balance factor of a node
     int getBalance(Node* n) {
         return n ? height(n->left) - height(n->right) : 0;
     }
 
+    // Right rotation for balancing the tree
     Node* rightRotate(Node* y) {
         Node* x = y->left;
         Node* T2 = x->right;
@@ -51,6 +58,7 @@ private:
         return x;
     }
 
+    // Left rotation for balancing the tree
     Node* leftRotate(Node* x) {
         Node* y = x->right;
         Node* T2 = y->left;
@@ -64,6 +72,7 @@ private:
         return y;
     }
 
+    // Recursive function to insert a new node into the AVL tree
     Node* insert(Node* node, int id, Contact contact, bool& duplicate) {
         if (!node)
             return new Node(id, contact);
@@ -73,7 +82,7 @@ private:
         else if (id > node->id)
             node->right = insert(node->right, id, contact, duplicate);
         else {
-            duplicate = true;
+            duplicate = true; // Duplicate ID found
             return node;
         }
 
@@ -81,17 +90,21 @@ private:
 
         int balance = getBalance(node);
 
+        // Left Left Case
         if (balance > 1 && id < node->left->id)
             return rightRotate(node);
 
+        // Right Right Case
         if (balance < -1 && id > node->right->id)
             return leftRotate(node);
 
+        // Left Right Case
         if (balance > 1 && id > node->left->id) {
             node->left = leftRotate(node->left);
             return rightRotate(node);
         }
 
+        // Right Left Case
         if (balance < -1 && id < node->right->id) {
             node->right = rightRotate(node->right);
             return leftRotate(node);
@@ -100,6 +113,7 @@ private:
         return node;
     }
 
+    // Recursive function to search for a node by ID
     Node* search(Node* node, int id) {
         if (!node || node->id == id)
             return node;
@@ -108,6 +122,7 @@ private:
         return search(node->right, id);
     }
 
+    // Inorder traversal to list all contacts
     void inorder(Node* node) {
         if (!node) return;
         inorder(node->left);
@@ -118,6 +133,7 @@ private:
         inorder(node->right);
     }
 
+    // Recursive function to display the tree structure horizontally
     void displayTree(Node* node, int space = 0, int indent = 4) {
         if (!node) return;
 
@@ -136,6 +152,7 @@ private:
         displayTree(node->left, space);
     }
 
+    // Helper function to find the node with the smallest value in a subtree
     Node* minValueNode(Node* node) {
         Node* current = node;
         while (current->left)
@@ -143,6 +160,7 @@ private:
         return current;
     }
 
+    // Recursive function to delete a node by ID
     Node* deleteNode(Node* root, int id, bool& found) {
         if (!root)
             return root;
@@ -152,7 +170,7 @@ private:
         else if (id > root->id)
             root->right = deleteNode(root->right, id, found);
         else {
-            found = true;
+            found = true; // Node to be deleted found
             if (!root->left || !root->right) {
                 Node* temp = root->left ? root->left : root->right;
                 delete root;
@@ -167,17 +185,21 @@ private:
         root->height = 1 + max(height(root->left), height(root->right));
         int balance = getBalance(root);
 
+        // Left Left Case
         if (balance > 1 && getBalance(root->left) >= 0)
             return rightRotate(root);
 
+        // Left Right Case
         if (balance > 1 && getBalance(root->left) < 0) {
             root->left = leftRotate(root->left);
             return rightRotate(root);
         }
 
+        // Right Right Case
         if (balance < -1 && getBalance(root->right) <= 0)
             return leftRotate(root);
 
+        // Right Left Case
         if (balance < -1 && getBalance(root->right) > 0) {
             root->right = rightRotate(root->right);
             return leftRotate(root);
@@ -187,10 +209,12 @@ private:
     }
 
 public:
+    // Constructor to initialize the AVL tree
     AVLTree() {
         root = nullptr;
     }
 
+    // Public function to insert a new contact
     void insert(int id, Contact contact) {
         bool duplicate = false;
         root = insert(root, id, contact, duplicate);
@@ -200,6 +224,7 @@ public:
             cout << "Contact added successfully." << endl;
     }
 
+    // Public function to search for a contact by ID
     void search(int id) {
         Node* res = search(root, id);
         if (!res) {
@@ -213,6 +238,7 @@ public:
         }
     }
 
+    // Public function to delete a contact by ID
     void deleteContact(int id) {
         bool found = false;
         root = deleteNode(root, id, found);
@@ -222,6 +248,7 @@ public:
             cout << "Contact not found." << endl;
     }
 
+    // Public function to list all contacts
     void listContacts() {
         if (!root) {
             cout << "Address Book is empty." << endl;
@@ -231,6 +258,7 @@ public:
         }
     }
 
+    // Public function to display the tree structure
     void displayTreeStructure() {
         if (!root)
             cout << "Address Book is empty." << endl;
@@ -240,21 +268,21 @@ public:
         }
     }
 
+    // Public function to check if a contact exists by ID
     bool exists(int id) {
         return search(root, id) != nullptr;
     }
-
 };
 
-
 int main() {
-    AVLTree addressBook;
-    int choice;
+    AVLTree addressBook; // Create an instance of the AVLTree
+    int choice; // Variable to store user choice
 
     cout << "\n---------------------------------------"
             "\nWelcome to the Address Book Application\n"
              << "---------------------------------------\n";
     while (true) {
+        // Display menu options
         cout << "\nChoose what do you want to do:\n"
              << "------------------------\n"
              << "1. Add New Contact\n"
