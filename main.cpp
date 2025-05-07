@@ -251,9 +251,9 @@ int main() {
     AVLTree addressBook;
     int choice;
 
-    cout << "------------------------"
-            "\nAddress Book Application\n"
-             << "------------------------\n";
+    cout << "\n---------------------------------------"
+            "\nWelcome to the Address Book Application\n"
+             << "---------------------------------------\n";
     while (true) {
         cout << "\nChoose what do you want to do:\n"
              << "------------------------\n"
@@ -262,13 +262,14 @@ int main() {
              << "3. Delete Contact (Optional)\n"
              << "4. List All Contacts (Sorted by ID)\n"
              << "5. Display Current Tree Structure\n"
+             << "6. Exit\n"
              << "------------------------\n"
-             << "Enter operation (1-5): ";
+             << "Enter operation (1-6): ";
         cin >> choice;
 
         if (cin.fail()) {
             cin.clear(); cin.ignore(10000, '\n');
-            cout << "Invalid input. Please enter a number from 1 to 5." << endl;
+            cout << "Invalid input. Please enter a number from 1 to 6." << endl;
             continue;
         }
 
@@ -425,8 +426,12 @@ int main() {
             addressBook.displayTreeStructure();
             cout << endl;
         }
+        else if (choice == 6) {
+            cout << "\nExiting the program. Goodbye!" << endl;
+            break;
+        }
         else {
-            cout << "Invalid choice. Please select between 1 and 5." << endl;
+            cout << "Invalid choice. Please select between 1 and 6." << endl;
         }
     }
 
