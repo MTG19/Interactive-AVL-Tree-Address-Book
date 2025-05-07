@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <fstream>
+#include <limits>
 using namespace std;
 
 struct Contact {
@@ -230,7 +232,6 @@ public:
 
 };
 
-
 int main() {
     AVLTree addressBook;
     int choice;
@@ -254,18 +255,66 @@ int main() {
         }
 
         if (choice == 1) {
-            int id;
-            Contact contact;
-            cout << "Enter unique ID (integer): ";
-            cin >> id;
-            cin.ignore();  // clear newline
-            cout << "Enter name: ";
-            getline(cin, contact.name);
-            cout << "Enter phone: ";
-            getline(cin, contact.phone);
-            cout << "Enter email: ";
-            getline(cin, contact.email);
-            addressBook.insert(id, contact);
+            int mode;
+            cout << "Choose input method:\n"
+                 << "1. Manual input (cin)\n"
+                 << "2. Read from file\n"
+                 << "Enter choice: ";
+
+            while (!(cin >> mode) || (mode != 1 && mode != 2)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Please enter a valid choice (1 or 2): ";
+            }
+
+
+            if (mode == 1) {
+                int id;
+                Contact contact;
+                cout << "Enter unique ID (integer): ";
+                cin >> id;
+                cin.ignore();  // clear newline
+                cout << "Enter name: ";
+                getline(cin, contact.name);
+                cout << "Enter phone: ";
+                getline(cin, contact.phone);
+                cout << "Enter email: ";
+                getline(cin, contact.email);
+                addressBook.insert(id, contact);
+            }
+            else if (mode == 2) {
+                string filename;
+                ifstream infile;
+
+                // Prompt for file name until a valid file is provided
+                while (true) {
+                    cout << "Enter file name: ";
+                    cin >> filename;
+
+                    infile.open(filename);
+                    if (!infile) {
+                        cerr << "Error: Could not open file. Try again.\n";
+                        infile.clear(); // clear the error state
+                    } else {
+                        break; // if file opened successfully
+                    }
+                }
+
+                int n, id;
+                Contact contact;
+                infile >> n;
+                for (int i = 0; i < n; ++i) {
+                    infile >> id >> contact.name >> contact.phone >> contact.email;
+                    addressBook.insert(id, contact);
+                }
+
+                infile.close();
+                cout << "Contacts loaded successfully from file.\n";
+            }
+
+            else {
+                cout << "Invalid input method. Please choose 1 or 2.\n";
+            }
         }
         else if (choice == 2) {
             int id;
