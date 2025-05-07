@@ -433,3 +433,149 @@ int main() {
     return 0;
 }
 
+/**
+Test Case: Contact Management Program
+
+Input Data (input.txt):
+-----------------------------
+3
+101
+Ahmed Ali
+01012345678
+ahmed@example.com
+102
+Sara Nabil
+01098765432
+sara@example.com
+103
+Kareem Hassan
+01234567890
+kareem@example.com
+
+1. Add New Contact:
+-------------------
+1. When the user chooses option "1" (Add New Contact):
+   - Expected behavior: User is prompted to enter contact details.
+   - Example input:
+     Enter contact ID: 104
+     Enter contact name: John Doe
+     Enter contact phone: 01122334455
+     Enter contact email: john@example.com
+   - Expected Output: "Contact with ID 104 inserted successfully."
+   - The contact with ID 104 should be added to the list.
+
+2. When trying to add a contact with an existing ID:
+   - Example input:
+     Enter contact ID: 101
+     Enter contact name: Duplicate Name
+     Enter contact phone: 01122334456
+     Enter contact email: duplicate@example.com
+   - Expected Output: "Error: Contact with ID 101 already exists."
+
+2. Search for Contact:
+----------------------
+3. When the user chooses option "2" (Search for Contact):
+   - Expected behavior: User is prompted to enter the contact ID.
+   - Example input:
+     Enter contact ID: 102
+   - Expected Output:
+     ID: 102
+     Name: Sara Nabil
+     Phone: 01098765432
+     Email: sara@example.com
+
+4. Searching for a non-existing contact ID:
+   - Example input:
+     Enter contact ID: 999
+   - Expected Output: "Error: Contact with ID 999 not found."
+
+3. Delete Contact :
+-----------------------------
+5. When the user chooses option "3" (Delete Contact):
+   - Expected behavior: User is prompted to enter the contact ID to delete.
+   - Example input:
+     Enter contact ID: 103
+   - Expected Output: "Contact with ID 103 deleted successfully."
+   - The contact with ID 103 should be removed from the contact list.
+
+6. Trying to delete a non-existing contact ID:
+   - Example input:
+     Enter contact ID: 999
+   - Expected Output: "Error: Contact with ID 999 not found."
+
+4. List All Contacts (Sorted by ID):
+-----------------------------------
+7. When the user chooses option "4" (List All Contacts):
+   - Expected behavior: All contacts are displayed, sorted by their IDs.
+   - Expected Output:
+     ID: 101
+     Name: Ahmed Ali
+     Phone: 01012345678
+     Email: ahmed@example.com
+
+     ID: 102
+     Name: Sara Nabil
+     Phone: 01098765432
+     Email: sara@example.com
+
+     ID: 104
+     Name: John Doe
+     Phone: 01122334455
+     Email: john@example.com
+   - Contacts should be sorted by their IDs in ascending order.
+
+5. Display Current Tree Structure:
+--------------------------------
+8. When the user chooses option "5" (Display Current Tree Structure):
+   - Expected behavior: The tree structure should display the current state of the contact list (in the form of a horizontal tree).
+   - Example output:
+         103
+    102
+         101
+
+6. Invalid Input for Menu Choices:
+--------------------------------
+9. When the user enters an invalid choice (not between 1 and 5):
+   - Example input: 6
+   - Expected Output: "Error: Invalid choice. Please enter a number between 1 and 5."
+
+10. Invalid Input for Contact ID:
+---------------------------------
+11. When the user enters a non-numeric value for contact ID:
+    - Example input: abc
+    - Expected Output: "Error: Invalid contact ID. Please enter a valid numeric ID."
+
+12. When the user enters a contact ID with letters (not a valid phone number):
+    - Example input: 010ABCDE
+    - Expected Output: "Error: Invalid phone number. Please enter a valid phone number."
+
+13. When the user enters a contact email that is not valid:
+    - Example input: john@.com
+    - Expected Output: "Error: Invalid email address. Please enter a valid email."
+
+14. When the user enters missing data for contact name or phone:
+    - Example input:
+      Enter contact ID: 105
+      Enter contact name: (blank)
+      Enter contact phone: 01133445566
+      Enter contact email: johnnew@example.com
+    - Expected Output: "Error: Contact name cannot be empty."
+
+15. When the user enters missing phone or email data:
+    - Example input:
+      Enter contact ID: 106
+      Enter contact name: New User
+      Enter contact phone: (blank)
+      Enter contact email: newuser@example.com
+    - Expected Output: "Error: Contact phone cannot be empty."
+
+16. When the user enters invalid data format in the Add/Update process:
+    - Example input:
+      Enter contact ID: 107
+      Enter contact name: Invalid User
+      Enter contact phone: 123
+      Enter contact email: invaliduser.com
+    - Expected Output: "Error: Invalid phone number or email format."
+
+
+ **/
