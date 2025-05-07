@@ -235,7 +235,7 @@ public:
         if (!root)
             cout << "Address Book is empty." << endl;
         else {
-            cout << "Current AVL Tree:" << endl;
+            cout<< "\nCurrent AVL Tree Structure Horizontally:\n";
             displayTree(root);
         }
     }
@@ -285,70 +285,100 @@ int main() {
                 cout << "Please enter a valid choice (1 or 2): ";
             }
 
-
             if (mode == 1) {
-                int id;
-                Contact contact;
-
-                cout << "Enter unique ID (integer): ";
-                // Prompt for unique ID until a valid one is provided
-                while (true) {
-                    cin >> id;
-
-                    if (cin.fail()) {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        cout << "Invalid input. ID must be an integer.\nPlease enter valid ID: ";
-                        continue;
-                    }
-
-                    if (addressBook.exists(id)) {
-                        cout << "This ID already exists. Please enter a different ID.\nPlease try another ID: ";
-                        continue;
-                    }
-
-                    break; // valid id
+                int count;
+                cout << "\nHow many contacts do you want to add? ";
+                while (!(cin >> count) || count <= 0) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Please enter a valid positive number: ";
                 }
 
-                cin.ignore();  // clear newline
-                cout << "Enter name: ";
-                getline(cin, contact.name);
-                cout << "Enter phone: ";
-                getline(cin, contact.phone);
-                cout << "Enter email: ";
-                getline(cin, contact.email);
-                addressBook.insert(id, contact);
+                for (int i = 0; i < count; ++i) {
+                    int id;
+                    Contact contact;
+                    cout << "\nAdding contact #" << (i + 1) << endl;
 
+                    cout << "Enter unique ID (integer): ";
+                    while (true) {
+                        cin >> id;
+
+                        if (cin.fail()) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Invalid input. ID must be an integer.\nPlease enter valid ID: ";
+                            continue;
+                        }
+
+                        if (addressBook.exists(id)) {
+                            cout << "This ID already exists. Please enter a different ID.\nPlease try another ID: ";
+                            continue;
+                        }
+
+                        break; // valid id
+                    }
+
+                    cin.ignore(); // clear newline after ID
+                    cout << "Enter name: ";
+                    getline(cin, contact.name);
+                    cout << "Enter phone: ";
+                    getline(cin, contact.phone);
+                    cout << "Enter email: ";
+                    getline(cin, contact.email);
+
+                    addressBook.insert(id, contact);
+                }
             }
+            // File input
             else if (mode == 2) {
                 string filename;
                 ifstream infile;
 
-                // Prompt for file name until a valid file is provided
                 while (true) {
-                    cout << "Enter file name: ";
+                    cout << "\nEnter file name: ";
                     cin >> filename;
-
                     infile.open(filename);
                     if (!infile) {
                         cerr << "Error: Could not open file. Try again.\n";
-                        infile.clear(); // clear the error state
-                    } else {
-                        break; // if file opened successfully
+                        infile.clear();
+                        continue;
                     }
+                    break;
                 }
 
-                int n, id;
-                Contact contact;
-                infile >> n;
-                for (int i = 0; i < n; ++i) {
-                    infile >> id >> contact.name >> contact.phone >> contact.email;
+                int count;
+                infile >> count;
+                if (infile.fail() || count <= 0) {
+                    cerr << "Invalid contact count in file. Make sure the first line is a positive number.\n";
+                    infile.close();
+                    continue;
+                }
+
+                for (int i = 0; i < count; ++i) {
+                    int id;
+                    Contact contact;
+                    infile >> id;
+                    infile.ignore(); // skip newline before getline
+                    getline(infile, contact.name);
+                    getline(infile, contact.phone);
+                    getline(infile, contact.email);
+
+                    if (infile.fail()) {
+                        cerr << "Error reading contact #" << (i + 1) << ". Check the file format.\n";
+                        break;
+                    }
+
+                    if (addressBook.exists(id)) {
+                        cout << "Duplicate ID " << id << " found in file. Skipping this contact.\n";
+                        continue;
+                    }
+
                     addressBook.insert(id, contact);
                 }
 
                 infile.close();
-                cout << "Contacts loaded successfully from file.\n";
             }
+
 
             else {
                 cout << "Invalid input method. Please choose 1 or 2.\n";
@@ -392,8 +422,8 @@ int main() {
             addressBook.listContacts();
         }
         else if (choice == 5) {
-            cout<< "\nCurrent AVL Tree Structure Horizontally:\n";
             addressBook.displayTreeStructure();
+            cout << endl;
         }
         else {
             cout << "Invalid choice. Please select between 1 and 5." << endl;
@@ -402,3 +432,4 @@ int main() {
 
     return 0;
 }
+
