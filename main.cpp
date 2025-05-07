@@ -62,6 +62,53 @@ private:
         return y;
     }
 
+    Node* insert(Node* node, int id, Contact contact, bool& duplicate) {
+        if (!node)
+            return new Node(id, contact);
+
+        if (id < node->id)
+            node->left = insert(node->left, id, contact, duplicate);
+        else if (id > node->id)
+            node->right = insert(node->right, id, contact, duplicate);
+        else {
+            duplicate = true;
+            return node;
+        }
+
+        node->height = 1 + max(height(node->left), height(node->right));
+
+        int balance = getBalance(node);
+
+        if (balance > 1 && id < node->left->id)
+            return rightRotate(node);
+
+        if (balance < -1 && id > node->right->id)
+            return leftRotate(node);
+
+        if (balance > 1 && id > node->left->id) {
+            node->left = leftRotate(node->left);
+            return rightRotate(node);
+        }
+
+        if (balance < -1 && id < node->right->id) {
+            node->right = rightRotate(node->right);
+            return leftRotate(node);
+        }
+
+        return node;
+    }
+
+    Node* search(Node* node, int id) {
+        if (!node || node->id == id)
+            return node;
+        if (id < node->id)
+            return search(node->left, id);
+        return search(node->right, id);
+    }
+
+
+};
+
 
 
 int main() {
