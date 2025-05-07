@@ -174,6 +174,59 @@ private:
         return root;
     }
 
+public:
+    AVLTree() {
+        root = nullptr;
+    }
+
+    void insert(int id, Contact contact) {
+        bool duplicate = false;
+        root = insert(root, id, contact, duplicate);
+        if (duplicate)
+            cout << "Error: Contact with ID " << id << " already exists." << endl;
+        else
+            cout << "Contact added successfully." << endl;
+    }
+
+    void search(int id) {
+        Node* res = search(root, id);
+        if (!res) {
+            cout << "Contact not found." << endl;
+        } else {
+            cout << "Contact found:" << endl;
+            cout << "ID: " << res->id << endl;
+            cout << "Name: " << res->contact.name << endl;
+            cout << "Phone: " << res->contact.phone << endl;
+            cout << "Email: " << res->contact.email << endl;
+        }
+    }
+
+    void deleteContact(int id) {
+        bool found = false;
+        root = deleteNode(root, id, found);
+        if (found)
+            cout << "Contact deleted successfully." << endl;
+        else
+            cout << "Contact not found." << endl;
+    }
+
+    void listContacts() {
+        if (!root) {
+            cout << "Address Book is empty." << endl;
+        } else {
+            cout << "Contacts in Address Book (sorted by ID):" << endl;
+            inorder(root);
+        }
+    }
+
+    void displayTreeStructure() {
+        if (!root)
+            cout << "Address Book is empty." << endl;
+        else {
+            cout << "Current AVL Tree:" << endl;
+            displayTree(root);
+        }
+    }
 
 };
 
